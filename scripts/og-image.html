@@ -1,0 +1,330 @@
+<!doctype html>
+<!--
+    Social preview of belote.sainthillier.fr, in the layout of sainthillier.fr's: drawn at 1200×630 for og:image (og-image.png)
+    and, with #github, at 1280×640 inside GitHub's 80px safe border (.github/social-preview.png, uploaded by hand in the
+    repository's Settings → Social preview). Regenerate both with `node scripts/og-image.mjs` after a design or copy change.
+-->
+<html lang="fr">
+    <head>
+        <meta charset="utf-8" />
+        <!-- The site's fonts, from Google Fonts: only this page loads them, on the machine that draws the images -->
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=block" />
+        <style>
+            :root {
+                --primary: #b45309;
+                --pill: #ead679;
+                --on-pill: #3b2f1e;
+                --surface: #fbf9f5;
+                --surface-card: #ffffff;
+                --surface-low: #f6f3ed;
+                --surface-high: #efe6d3;
+                --ink: #2b2118;
+                --muted: #6b5a45;
+                --dot: #e87e04;
+                --hairline: rgb(0 0 0 / 0.08);
+                --font-sans: 'Inter', sans-serif;
+                --font-heading: 'Inter', sans-serif;
+            }
+
+            * {
+                box-sizing: border-box;
+                margin: 0;
+            }
+
+            html,
+            body {
+                width: 100vw;
+                height: 100vh;
+                overflow: hidden;
+            }
+
+            body {
+                position: relative;
+                display: flex;
+                flex-direction: column;
+                padding: 64px 72px 56px;
+                background: var(--surface);
+                color: var(--ink);
+                font-family: var(--font-sans);
+                -webkit-font-smoothing: antialiased;
+            }
+
+            /* GitHub crops its previews to other ratios: what matters stays 80px away from every edge */
+            body.github {
+                padding: 80px;
+            }
+
+            svg {
+                width: 1em;
+                height: 1em;
+                flex-shrink: 0;
+            }
+
+            .blob {
+                position: absolute;
+                border-radius: 9999px;
+                filter: blur(64px);
+            }
+
+            .blob-primary {
+                top: -160px;
+                right: -80px;
+                width: 620px;
+                height: 620px;
+                background: rgb(232 126 4 / 0.10);
+            }
+
+            .blob-accent {
+                bottom: -200px;
+                left: -120px;
+                width: 460px;
+                height: 460px;
+                background: rgb(234 214 121 / 0.35);
+            }
+
+            .badges {
+                position: relative;
+                display: flex;
+                gap: 10px;
+                margin-bottom: 28px;
+            }
+
+            .badge {
+                display: inline-flex;
+                align-items: center;
+                gap: 8px;
+                padding: 8px 16px;
+                border-radius: 9999px;
+                background: var(--surface-low);
+                font-size: 16px;
+                font-weight: 600;
+                letter-spacing: 0.04em;
+                white-space: nowrap;
+            }
+
+            .badge-status {
+                background: var(--surface-high);
+                text-transform: uppercase;
+            }
+
+            .badge-topic {
+                color: var(--primary);
+            }
+
+            .dot {
+                width: 10px;
+                height: 10px;
+                border-radius: 9999px;
+                background: var(--dot);
+            }
+
+            .content {
+                position: relative;
+                display: flex;
+                flex: 1;
+                gap: 48px;
+            }
+
+            .intro {
+                display: flex;
+                flex: 1;
+                flex-direction: column;
+                justify-content: center;
+            }
+
+            h1 {
+                font-family: var(--font-heading);
+                font-size: 62px;
+                font-weight: 800;
+                line-height: 1.06;
+                letter-spacing: -0.03em;
+            }
+
+            .highlight {
+                color: var(--primary);
+            }
+
+            .lead {
+                margin-top: 24px;
+                font-size: 26px;
+                line-height: 1.4;
+                color: var(--muted);
+            }
+
+            .lead strong {
+                color: var(--ink);
+                font-weight: 600;
+            }
+
+            .site {
+                display: inline-flex;
+                align-self: flex-start;
+                align-items: center;
+                gap: 10px;
+                margin-top: 36px;
+                padding: 12px 22px;
+                border-radius: 12px;
+                background: var(--pill);
+                color: var(--on-pill);
+                font-family: var(--font-heading);
+                font-size: 24px;
+                font-weight: 700;
+            }
+
+            .card-wrap {
+                position: relative;
+                flex-shrink: 0;
+                align-self: center;
+                width: 340px;
+            }
+
+            .card-glow {
+                position: absolute;
+                inset: -10px;
+                border-radius: 28px;
+                background: linear-gradient(to top right, rgb(232 126 4 / 0.10), rgb(234 214 121 / 0.35), transparent);
+                filter: blur(16px);
+            }
+
+            .card {
+                position: relative;
+                overflow: hidden;
+                border: 1px solid var(--hairline);
+                border-radius: 20px;
+                background: var(--surface-card);
+                box-shadow:
+                    0 20px 25px -5px rgb(11 28 48 / 0.1),
+                    0 8px 10px -6px rgb(11 28 48 / 0.1);
+            }
+
+            .profile {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 14px;
+                padding: 32px 24px 26px;
+                text-align: center;
+                background: var(--surface-low);
+                border-bottom: 1px solid var(--hairline);
+            }
+
+            .profile img {
+                width: 132px;
+                height: 132px;
+                object-fit: contain;
+            }
+
+            /* A typographic mark, for a site without a logo file */
+            .mark {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 6px;
+                height: 132px;
+                font-size: 44px;
+                font-weight: 300;
+                letter-spacing: -0.02em;
+            }
+
+            .mark.suits {
+                gap: 14px;
+                font-size: 64px;
+                color: var(--ink);
+            }
+
+            .name {
+                font-family: var(--font-heading);
+                font-size: 28px;
+                font-weight: 700;
+                letter-spacing: -0.01em;
+            }
+
+            .role {
+                margin-top: -8px;
+                font-size: 18px;
+                color: var(--muted);
+            }
+
+            .stats {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                padding: 20px 8px;
+                text-align: center;
+            }
+
+            .stats div {
+                display: flex;
+                flex-direction: column-reverse;
+            }
+
+            .stats div + div {
+                border-left: 1px solid var(--hairline);
+            }
+
+            .stats dd {
+                font-family: var(--font-heading);
+                font-size: 30px;
+                font-weight: 700;
+                line-height: 1.2;
+                white-space: nowrap;
+                color: var(--primary);
+            }
+
+            .stats dd.neutral {
+                color: var(--ink);
+            }
+
+            /* A word, not a figure: smaller, or it overflows its third of the card */
+            .stats dd.word {
+                font-size: 20px;
+                line-height: 36px;
+            }
+
+            .stats dt {
+                font-size: 12px;
+                font-weight: 600;
+                letter-spacing: 0.06em;
+                text-transform: uppercase;
+                color: #8a8f98;
+            }
+        </style>
+    </head>
+    <body>
+        <script>
+            if (location.hash === '#github') {
+                document.body.classList.add('github')
+            }
+        </script>
+        <div class="blob blob-primary"></div>
+        <div class="blob blob-accent"></div>
+
+        <div class="badges">
+            <span class="badge badge-status"><span class="dot"></span>Tournoi de belote</span>
+            <span class="badge badge-topic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6" /><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18" /><path d="M4 22h16" /><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22" /><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22" /><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z" /></svg>Classement en direct</span>
+        </div>
+        <div class="content">
+            <div class="intro">
+                <h1>Tournoi international <span class="highlight">de&nbsp;Belote</span></h1>
+                <p class="lead">Les <strong>équipes</strong>, les <strong>matchs</strong> en cours et le <strong>classement</strong>, suivis en direct jusqu’au podium.</p>
+                <span class="site"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" /><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" /></svg>belote.sainthillier.fr</span>
+            </div>
+
+            <div class="card-wrap">
+                <div class="card-glow"></div>
+                <div class="card">
+                    <div class="profile">
+                        <div class="mark suits"><span>♠</span><span style="color: #c0392b">♥</span><span style="color: #c0392b">♦</span><span>♣</span></div>
+                        <p class="name">Belote</p>
+                        <p class="role">Le tableau du tournoi</p>
+                    </div>
+                    <!-- Evergreen figures: a count would go stale -->
+                    <dl class="stats">
+                        <div><dt>Équipes</dt><dd class="neutral">Duos</dd></div>
+                        <div><dt>Matchs</dt><dd class="word">Direct</dd></div>
+                        <div><dt>Fin</dt><dd class="neutral word">Podium</dd></div>
+                    </dl>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
